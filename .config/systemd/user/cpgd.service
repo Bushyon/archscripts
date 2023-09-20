@@ -1,0 +1,13 @@
+[Unit]
+Description=copy things	
+After=rclone@google.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+ExecStart=/bin/bash %h/Outros/backtrack/cpgd.sh %h/Outros/backtrack/ %h/mnt/google/backtrack/
+
+[Install]
+WantedBy=default.target

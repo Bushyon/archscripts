@@ -1,0 +1,57 @@
+general {
+	colors = true
+	interval = 2
+	color_good = "#50fa7b"
+	color_degraded  = "#ffb86c"
+  color_bad = "#ff5555"
+}
+
+# order += "ethernet _first_"
+order += "cpu_usage"
+order += "cpu_temperature 0"
+order += "memory"
+order += "tztime local"
+order += "volume master"
+
+cpu_usage {
+	format = "CPU: %usage"
+}
+cpu_temperature 0 {
+	format = "%degrees °C"
+}
+tztime local {
+	format = "%a, %B %d - %H:%M"
+}
+
+ethernet _first_ {
+	#if use %speed, need requires root privileges
+	format_up = "%ip (%speed)"
+	format_down = "Ethernet is down"
+}
+disk "/" {
+	format = "%avail"
+}
+
+memory {
+        format = "%used"
+        threshold_degraded = "10%"
+        format_degraded = "MEMORY: %free"
+}
+
+load {
+    format = " %1min"
+}
+
+cpu_temperature 0 {
+        format = "%degrees °C"
+        path = "/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input"
+}
+
+volume master {
+	format = " ♪ %volume  " 
+	device = "default"
+	mixer = "Master"
+	mixer_idx = 0
+	#S termsyn font
+	format = "%volume %devicename"
+}
