@@ -16,8 +16,8 @@ font xft:URWGothic-Book 11
 
 ### Output configuration
 #
-exec --no-startup-id xrandr --output HDMI-A-0 --rotate inverted
-exec --no-startup-id xrandr --output "DisplayPort-0" --primary --mode 1920x1080 --rate 165.60
+exec --no-startup-id xrandr --output HDMI-1 --rotate inverted
+exec --no-startup-id xrandr --output DP-1 --primary --mode 1920x1080 --rate 165.60
 ### Key bindings
 #
 # Basics:
@@ -70,8 +70,8 @@ exec --no-startup-id xrandr --output "DisplayPort-0" --primary --mode 1920x1080 
     bindsym XF86AudioPause exec playerctl play-pause
     bindsym XF86AudioNext exec playerctl next
     bindsym XF86AudioPrev exec playerctl previous
-    bindsym XF86AudioRaiseVolume exec pactl -- set-sink-volume @DEFAULT_SINK@ +10%
-    bindsym XF86AudioLowerVolume exec pactl -- set-sink-volume @DEFAULT_SINK@ -10%
+    bindsym XF86AudioRaiseVolume exec pactl -- set-sink-volume @DEFAULT_SINK@ +5%
+    bindsym XF86AudioLowerVolume exec pactl -- set-sink-volume @DEFAULT_SINK@ -5%
     bindsym XF86AudioMute exec /home/bushy/.scripts/i3-sink-change/sink_change.sh --change
     # Rename workspaces
     bindsym $mod+n exec i3-input -F "rename workspace to "$(i3-msg -t get_workspaces | jq -r "map(select(.focused))[0].num"):%s"" -P "New name: "
@@ -197,7 +197,8 @@ tiling_drag modifier titlebar
 # Extensions:
 #
     # exec_always --no-startup-id autotiling -w 1 3 5 7 9
-    # exec_always --no-startup-id /usr/lib/xdg-desktop-portal-wlr -r 
+    # exec_always --no-startup-id /usr/lib/xdg-desktop-portal-wlr -r
+    exec_always for id in $(xinput list | grep "pointer" | cut -d '=' -f 2 | cut -f 1); do xinput --set-prop $id 'libinput Accel Profile Enabled' 0, 1; done
 #
 # Status Bar:
 #
