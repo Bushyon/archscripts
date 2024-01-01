@@ -8,7 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="aussiegeek"
+ZSH_THEME="fox"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -41,7 +41,7 @@ zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.
@@ -75,15 +75,15 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # Generate aliases for Flatpak applications
-flatpak_alias_generator() {
-    local packages=( $(flatpak list --app --columns=application) )
-    for package in "${packages[@]}"; do
-        alias "$package"="flatpak run $package"
-    done
-}
+#flatpak_alias_generator() {
+#    local packages=( $(flatpak list --app --columns=application) )
+#    for package in "${packages[@]}"; do
+#        alias "$package"="flatpak run $package"
+#    done
+#}
 
 # Run the alias generator function
-flatpak_alias_generator
+#flatpak_alias_generator
 
 # User configuration
 
@@ -117,4 +117,9 @@ alias vimi3='vim ~/.config/i3/config'
 alias proton-update='flatpak run net.davidotek.pupgui2' 
 alias start-share='systemctl --user start rclone@google.service cpgd.service'
 alias stop-share='systemctl --user stop rclone@google.service cpgd.service'
+alias code='code --enable-features=UseOzonePlatform --ozone-platform=wayland'
+alias chromium='chromium --enable-features=UseOzonePlatform --ozone-platform=wayland'
+alias spotify='spotify --enable-features=UseOzonePlatform --ozone-platform=wayland'
 #alias ls='ls -ac'
+# Created by `pipx` on 2023-11-19 16:32:09
+export PATH="$PATH:/home/bushy/.local/bin"
