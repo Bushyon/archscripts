@@ -1,0 +1,4 @@
+scripts/wakeTV/.venv/
+scripts/wakeTV/run.sh
+scripts/wakeTV/tv-token.txt
+

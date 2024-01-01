@@ -1,0 +1,13 @@
+[Unit]
+Description=Turn Monitors off
+DefaultDependencies=no
+Before=shutdown.target
+ 
+[Service]
+Type=oneshot                                                                    
+ExecStart=/bin/sh -c "/home/bushy/.scripts/wakeTV/run.sh;exit 0;" 
+TimeoutStartSec=0
+
+[Install]
+WantedBy=shutdown.target
+

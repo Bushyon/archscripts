@@ -1,0 +1,13 @@
+[Unit]
+Description=Turn Monitors off
+DefaultDependencies=no
+Before=shutdown.target
+ 
+[Service]
+Type=oneshot                                                                    
+ExecStart=/bin/sh -c "systemctl list-jobs | grep -Eq 'reboot.target.*start' || /usr/bin/ddcutil setvcp d6 5 -d 1 ; /usr/bin/ddcutil setvcp d6 4 -d 2; exit 0;" 
+TimeoutStartSec=0
+
+[Install]
+WantedBy=shutdown.target
+

@@ -1,0 +1,51 @@
+{
+    "height": 30,
+    "layer": "top",  
+    "spacing": 10, 
+    "modules-left": ["hyprland/workspaces"],
+    "modules-center": ["hyprland/window"],
+    "modules-right": [
+        "cpu", "custom/separator",
+        "temperature", "custom/separator",
+        "memory", "custom/separator",
+        "pulseaudio", "custom/separator",
+        "clock",
+        "tray"
+    ],
+
+    "custom/separator": {
+        "format": "|",
+        "interval": "once",
+        "tooltip": false
+    },
+    
+    "cpu": {
+        "format": "CPU: {usage}%",
+        "tooltip": false
+    },
+
+    "temperature": {
+        "critical-threshold": 80,
+        "format": "{temperatureC} °C"
+    },
+
+    "memory": {
+        "format": "{used:0.1f} GiB"
+    },
+
+    "clock": {
+        "tooltip-format": "<big>{: %a, %B %e - %H:%M}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{: %a, %B %e - %H:%M}"
+    },
+
+    "pulseaudio": {
+        "format": "{volume}% - {desc}",
+        "format-muted": "{format_source}",
+        "format-source": "{volume}%",
+        "on-click": "pavucontrol"
+    },
+
+    "tray": {
+        "spacing": 10
+    }
+}
