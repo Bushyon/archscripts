@@ -15,7 +15,7 @@ logging.basicConfig(level=logging.INFO)
 
 # Autosave token to file
 token_file = os.path.dirname(os.path.realpath(__file__)) + '/tv-token.txt'
-tv = SamsungTVWS(host='192.168.0.5', port=8002, token_file=token_file)
+tv = SamsungTVWS(host='xxx.xxx.xxx.xxx', port=8002, token_file=token_file)
 
 #Toggle power
 tv.shortcuts().power()
