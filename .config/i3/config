@@ -7,11 +7,12 @@ set $down j
 set $up k
 set $right l
 set $term alacritty
-set $accent-color       #efa00b
-set $menu bemenu-run -b --fn "Pango:monospace 25" --line-height 50 --tf "#efa00b" --hf "#efa00b" -i 
-#set $menu tofi-run | xargs swaymsg exec -- 
-set $bg-color           #1c1c1c
-set $fg-color           #dcdccc
+set $accent-color       #333333
+set $bg-color           #000000
+set $fg-color           #777777
+set $menu dmenu_run -nf "#777777" -nb "#000000" -sf "#000000" -sb "#777777" -p ">" -b -fn 'Monospace-14' -l 10
+# set $menu bemenu-run -b --fn "Pango:monospace 25" --line-height 50 --tf "#efa00b" --hf "#efa00b" -i
+
 
 font xft:URWGothic-Book 11
 
@@ -80,10 +81,9 @@ exec_always --no-startup-id xrandr --output HDMI-A-0 --mode 3840x2160 --rate 144
     bindsym $mod+F1 exec firefox
     bindsym $mod+F2 exec /home/bushy/.scripts/monitor_v3.sh
     bindsym $mod+F3 exec /home/bushy/.scripts/unsplit.sh
+    bindsym $mod+F4 exec $term -e ncpamixer
     bindsym $mod+Tab layout toggle tabbed splitv stacking
-    bindsym XF86MonBrightnessDown exec seq 2 | xargs -n 1 -P 2 sh -c 'ddcutil setvcp -d $1 10 - 10  --sleep-multiplier 0.3 --noverify' sh
-    bindsym XF86MonBrightnessUp exec seq 2 | xargs -n 1 -P 2 sh -c 'ddcutil setvcp -d $1 10 + 10  --sleep-multiplier 0.3 --noverify' sh
-    bindsym $mod+F4 exec $term -e ncpamixer 
+    bindsym $mod+Shift+Tab layout toggle
 #
 # Workspaces:
 #
@@ -137,6 +137,7 @@ exec_always --no-startup-id xrandr --output HDMI-A-0 --mode 3840x2160 --rate 144
 #
 # Open specific applications in floating mode
 #
+    for_window [class="^.*"] border pixel 2
     for_window [title="alsamixer"] floating enable border pixel 1
     for_window [title="burp-StartBurp"] floating enable border pixel 1
     for_window [class="Calamares"] floating enable border normal
@@ -190,16 +191,18 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
-
-
+#
+# Gaps:
+#
+gaps inner 5
 #
 # Drag tiles:
-tiling_drag modifier titlebar
 #
+tiling_drag modifier titlebar
 #
 # Extensions:
 #
-    # exec_always --no-startup-id autotiling -w 1 3 5 7 9
+    exec_always --no-startup-id autotiling
     # exec_always --no-startup-id /usr/lib/xdg-desktop-portal-wlr -r
     exec_always --no-startup-id for id in $(xinput list | grep "pointer" | cut -d '=' -f 2 | cut -f 1); do xinput --set-prop $id 'libinput Accel Profile Enabled' 0, 1; done
 #
@@ -209,11 +212,11 @@ bar {
 
     colors {
         background $bg-color
-        statusline $fg-color
-        separator  $fg-color
-        focused_workspace  $accent-color $bg-color $fg-color
+        statusline $accent-color
+        separator  $accent-color
+        focused_workspace  $fg-color $bg-color $fg-color
         active_workspace   $fg-color $bg-color $fg-color
-        inactive_workspace $fg-color $bg-color $fg-color
+        inactive_workspace $accent-color $bg-color $accent-color
         urgent_workspace   $accent-color $bg-color $fg-color
     }
     tray_output primary
@@ -223,15 +226,9 @@ bar {
 #
 # Theme colors
 #
-client.focused          $accent-color   $bg-color   $fg-color     $accent-color   $accent-color
-client.focused_inactive $bg-color       $bg-color   $fg-color     $bg-color       $bg-color
+client.focused          $accent-color   $bg-color   $fg-color     $fg-color   $fg-color
+client.focused_inactive $bg-color       $bg-color   $fg-color     $accent-color       $accent-color
 client.unfocused        $bg-color       $bg-color   $fg-color     $bg-color       $bg-color
 client.urgent           $accent-color   $bg-color   $fg-color     $fg-color       $accent-color
 client.placeholder      $accent-color   $bg-color   $fg-color     $fg-color       $accent-color
 client.background       $bg-color
-
-
-
-
-
-
