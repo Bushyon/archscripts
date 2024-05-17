@@ -1,7 +1,7 @@
 {
     "height": 30,
-    "layer": "top",  
-    "spacing": 10, 
+    "layer": "top",
+    "spacing": 10,
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["hyprland/window"],
     "modules-right": [
@@ -18,24 +18,30 @@
         "interval": "once",
         "tooltip": false
     },
-    
+
     "cpu": {
         "format": "CPU: {usage}%",
-        "tooltip": false
+        "tooltip": false,
+	"interval": 10,
     },
 
     "temperature": {
         "critical-threshold": 80,
-        "format": "{temperatureC} °C"
+        "format": "{temperatureC} °C",
+	"hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
+	"interval": 10,
     },
 
     "memory": {
-        "format": "{used:0.1f} GiB"
+        "format": "{used:0.1f} GiB",
+	"interval": 10,
     },
 
     "clock": {
-        "tooltip-format": "<big>{: %a, %B %e - %H:%M}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{: %a, %B %e - %H:%M}"
+        "interval": 60,
+        "tooltip": true,
+        "format": "{:%H:%M - %d-%m-%y}",
+        "tooltip-format": "{:%Y-%m-%d}",
     },
 
     "pulseaudio": {
